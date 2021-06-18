@@ -3,6 +3,9 @@ package com.abdulkarim.userapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.Toast;
+
 import com.abdulkarim.userapp.fragments.CartFragment;
 import com.abdulkarim.userapp.fragments.FavouriteFragment;
 import com.abdulkarim.userapp.fragments.HomeFragment;
@@ -12,6 +15,7 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 public class MainActivity extends AppCompatActivity {
 
     private ChipNavigationBar chipNavigationBar;
+    private boolean isFirstPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,33 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
         bottomMenu();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (chipNavigationBar.getSelectedItemId() == R.id.bottom_nav_home){
+            if (isFirstPressed) {
+                super.onBackPressed();
+                //finishAffinity();
+            } else {
+                isFirstPressed = true;
+                showMessage("Press back again to exit");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        isFirstPressed = false;
+                    }
+                }, 1500);
+            }
+
+        }else{
+            chipNavigationBar.setItemSelected(R.id.bottom_nav_home,true);
+
+        }
+    }
+
+    private void showMessage(String message) {
+        Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
     }
 
     private void bottomMenu() {

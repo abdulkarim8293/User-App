@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     tools:context=".CheckoutActivity">
+
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <ImageView
+            android:id="@+id/backIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="CHECK OUT"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_more_vert_24" />
+
+    </RelativeLayout>
 
 
     <RelativeLayout
+        android:layout_below="@+id/top_bar"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -19,95 +56,95 @@
 
 
         <LinearLayout
-            android:layout_alignParentTop="true"
-            android:layout_above="@+id/ll_order_summary"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_order_summary"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:padding="5dp">
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Product List"
-                android:textSize="16sp"/>
+                android:text="PRODUCT LIST"
+                android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/checkoutRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:padding="5dp"
             android:id="@+id/ll_order_summary"
-            android:layout_marginBottom="5dp"
-            android:layout_above="@+id/ll_delivery_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_above="@+id/ll_delivery_address"
+            android:layout_marginBottom="5dp"
+            android:orientation="vertical"
+            android:padding="5dp">
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Order Summary"
-                android:textSize="16sp"/>
+                android:text="ORDER SUMMARY"
+                android:textSize="16sp" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
+
                 <TextView
-                    android:layout_weight="1"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Shipping Fee" />
+
                 <TextView
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="৳ 150" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:layout_weight="1"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Sub Total" />
+
                 <TextView
                     android:id="@+id/checkout_sub_total_text_view"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="11111" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:layout_weight="1"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:textColor="#000000"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total Payable" />
+                    android:layout_weight="1"
+                    android:text="Total Payable"
+                    android:textColor="#000000" />
+
                 <TextView
                     android:id="@+id/checkout_total_payable_text_view"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1111"
@@ -117,10 +154,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_above="@+id/place_order_button"
             android:id="@+id/ll_delivery_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/place_order_button"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -146,12 +183,12 @@
             </LinearLayout>
 
             <Button
-                android:layout_marginTop="5dp"
                 android:id="@+id/select_address_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/button_selector"
+                android:padding="10dp"
                 android:text="SELECT ADDRESS" />
 
             <LinearLayout
@@ -167,12 +204,12 @@
                     android:visibility="gone">
 
                     <TextView
-                        android:textSize="12sp"
                         android:id="@+id/addressTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineHeight="18dp"
-                        android:text="Hello" />
+                        android:text="Hello"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -181,12 +218,12 @@
         </LinearLayout>
 
         <Button
-            android:visibility="invisible"
-            android:background="@drawable/button_background"
-            android:layout_alignParentBottom="true"
             android:id="@+id/place_order_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Payment"/>
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_background"
+            android:text="Payment"
+            android:visibility="invisible" />
     </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
