@@ -46,21 +46,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         holder.product_name_text.setText(""+cart.getName());
         holder.product_price_text.setText("৳ "+cart.getPrice());
-        holder.sub_total_text.setText("Sub Total : "+(Integer.parseInt(cart.getPrice())*cart.getQuantity()));
+        holder.sub_total_text.setText("Total : "+(Integer.parseInt(cart.getPrice())*cart.getQuantity()));
 
         Picasso.get().load(cart.getImage())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.product_image);
 
-        holder.button_quantity.setNumber(""+cart.getQuantity());
-        holder.button_quantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
+        holder.quantity.setText(""+cart.getQuantity());
+        holder.item_increase.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                cart.setQuantity(newValue);
+            public void onClick(View view) {
+
+                cart.setQuantity(cart.getQuantity()+1);
                 new SQLiteDatabaseHelper(context.getContext()).updateCartProduct(cart);
 
-                holder.sub_total_text.setText("Sub Total : "+(Integer.parseInt(cart.getPrice())*cart.getQuantity()));
+                holder.quantity.setText(""+cart.getQuantity());
+                holder.sub_total_text.setText("Total : "+(Integer.parseInt(cart.getPrice())*cart.getQuantity()));
                 // update total price and quantity here...
                 double total = 0.0;
                 List<Cart> cartList = new SQLiteDatabaseHelper(context.getContext()).getAllCartProduct();
@@ -73,8 +75,31 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 context.total_item.setText("Total Item : "+cartList.size());
             }
         });
+        holder.item_decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cart.getQuantity() > 1) {
 
-        holder.clear_product_text.setOnClickListener(new View.OnClickListener() {
+                    cart.setQuantity(cart.getQuantity() - 1);
+                    new SQLiteDatabaseHelper(context.getContext()).updateCartProduct(cart);
+
+                    holder.quantity.setText("" + cart.getQuantity());
+                    holder.sub_total_text.setText("Total : " + (Integer.parseInt(cart.getPrice()) * cart.getQuantity()));
+                    // update total price and quantity here...
+                    double total = 0.0;
+                    List<Cart> cartList = new SQLiteDatabaseHelper(context.getContext()).getAllCartProduct();
+
+                    for (Cart cart : cartList) {
+                        total += (Double.parseDouble(cart.getPrice()) * cart.getQuantity());
+
+                    }
+                    context.total_amount.setText("Total Amount : " + total);
+                    context.total_item.setText("Total Item : " + cartList.size());
+                }
+            }
+        });
+
+        holder.close_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 removeItem(cart);
@@ -111,10 +136,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView product_image;
+        private ImageView product_image,close_icon;
         private TextView product_name_text,product_price_text,sub_total_text,clear_product_text;
-        
-        private ElegantNumberButton button_quantity;
+        private TextView item_increase,item_decrease,quantity;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -123,9 +147,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             product_name_text = itemView.findViewById(R.id.item_cart_product_name_text_view);
             product_price_text = itemView.findViewById(R.id.item_cart_product_price_text_view);
             sub_total_text = itemView.findViewById(R.id.item_cart_sub_total_text_view);
-            clear_product_text = itemView.findViewById(R.id.item_cart_product_clear_text_view);
+            close_icon = itemView.findViewById(R.id.item_cart_product_clear_text_view);
 
-            button_quantity = itemView.findViewById(R.id.btn_quantity);
+
+            item_increase = itemView.findViewById(R.id.item_cart_increase);
+            item_decrease = itemView.findViewById(R.id.item_cart_decrease);
+            quantity = itemView.findViewById(R.id.item_cart_quantity);
 
         }
     }

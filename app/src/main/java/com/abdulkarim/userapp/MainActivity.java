@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         if (chipNavigationBar.getSelectedItemId() == R.id.bottom_nav_home){
             if (isFirstPressed) {
                 super.onBackPressed();
-                //finishAffinity();
             } else {
                 isFirstPressed = true;
                 showMessage("Press back again to exit");

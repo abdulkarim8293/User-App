@@ -10,21 +10,14 @@
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
-        <ImageView
-            android:id="@+id/backIv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MY CART"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="18sp"
-            android:textStyle="normal"/>
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
+            android:background="@drawable/button_background"
             android:text="Checkout"/>
     </LinearLayout>
 

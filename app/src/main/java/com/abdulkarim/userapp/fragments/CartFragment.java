@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abdulkarim.userapp.Cart;
@@ -29,6 +31,7 @@ import java.util.List;
 
 
 public class CartFragment extends Fragment {
+
     private RecyclerView recyclerView;
     private Button checkout_button;
     public TextView total_amount,total_item;
@@ -36,6 +39,7 @@ public class CartFragment extends Fragment {
 
     private SQLiteDatabaseHelper sqLiteDatabaseHelper;
     private CartAdapter cartAdapter;
+
 
     public CartFragment() {
         // Required empty public constructor
@@ -90,10 +94,9 @@ public class CartFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(cartAdapter);
-
     }
+
 }
