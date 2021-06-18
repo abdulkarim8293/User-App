@@ -40,7 +40,10 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
-    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
+    // spark button animation
+    implementation 'com.github.varunest:sparkbutton:1.0.6'
+    // loading animation
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
     //Chip Navigation
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.2'

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.abdulkarim.userapp.my_address.MyAddress;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,6 +31,7 @@ public class PaymentActivity extends AppCompatActivity {
     private List<Cart> cartList = new ArrayList<>();
 
     private MyAddress myAddress;
+    private CustomProgress customProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        customProgress = new CustomProgress(this);
 
         total_amount = findViewById(R.id.cart_total_amount_text_view);
         total_item = findViewById(R.id.cart_total_item_text_view);
@@ -98,6 +102,8 @@ public class PaymentActivity extends AppCompatActivity {
         findViewById(R.id.place_orders_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                customProgress.show();
 
                 Order order = new Order();
 
@@ -175,7 +181,15 @@ public class PaymentActivity extends AppCompatActivity {
 
 
 
-        batch.commit();
+        batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                customProgress.cancel();
+                startActivity(new Intent(PaymentActivity.this,ConfirmationActivity.class));
+                finish();
+            }
+        });
 
     }
 }

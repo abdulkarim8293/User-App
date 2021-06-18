@@ -14,4 +14,7 @@
     <color name="colorThemePink">#ED2173</color>
     <color name="colorThemeOrange">#F4442d</color>
 
+    <color name="red">#FF0000</color>
+    <color name="orange">#FF9800</color>
+
 </resources>

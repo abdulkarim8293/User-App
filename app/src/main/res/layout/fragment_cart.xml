@@ -31,11 +31,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:padding="8dp"
         android:id="@+id/cart_recycler_view"
         android:layout_below="@+id/top_bar" />
     <LinearLayout
-        android:paddingTop="10dp"
+        android:padding="10dp"
         android:background="#F6F6F6"
         android:id="@+id/ll_bottom"
         android:layout_alignParentBottom="true"

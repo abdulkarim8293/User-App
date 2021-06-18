@@ -163,6 +163,13 @@ public class CheckoutActivity extends AppCompatActivity {
             }
         });
 
+        editAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CheckoutActivity.this, AddressListActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
 
     }
 

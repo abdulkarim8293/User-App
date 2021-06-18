@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UserApp"
         tools:replace="android:theme">
-        <activity android:name=".my_address.AddAddressActivity"></activity>
+        <activity android:name=".ConfirmationActivity"></activity>
+        <activity android:name=".my_address.AddAddressActivity" />
         <activity android:name=".my_address.AddressListActivity" />
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.SplashActivity">

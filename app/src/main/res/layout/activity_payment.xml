@@ -5,48 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PaymentActivity">
+
     <RelativeLayout
         android:id="@+id/top_bar"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
+
         <ImageView
             android:id="@+id/backIv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_back"/>
+            android:padding="5dp"
+            android:src="@drawable/ic_back_24" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PAYMENT"
+            android:layout_marginStart="34dp"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:text="PAYMENT"
+            android:padding="5dp"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_more_vert_24"/>
+            android:padding="10dp"
+            android:src="@drawable/ic_more_vert_24" />
 
     </RelativeLayout>
 
     <LinearLayout
+        android:padding="10dp"
         android:layout_below="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_bottom"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textView"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAYMENT METHOD" />
+
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:background="#fff">
 
             <ImageView
                 android:padding="10dp"
@@ -88,6 +101,7 @@
                 </LinearLayout>
                 <RadioButton
                     android:checked="true"
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -95,10 +109,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
+            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="60dp"
@@ -138,6 +153,7 @@
 
                 </LinearLayout>
                 <RadioButton
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -154,9 +170,10 @@
         android:layout_alignParentBottom="true"
         android:background="#F6F6F6"
         android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:padding="10dp">
 
         <RelativeLayout
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp">
@@ -180,7 +197,11 @@
             android:id="@+id/place_orders_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/button_background"
             android:text="Place Order" />
     </LinearLayout>
 

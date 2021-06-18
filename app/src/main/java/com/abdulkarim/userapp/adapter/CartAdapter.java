@@ -16,8 +16,6 @@ import com.abdulkarim.userapp.Cart;
 import com.abdulkarim.userapp.R;
 import com.abdulkarim.userapp.SQLiteDatabaseHelper;
 import com.abdulkarim.userapp.fragments.CartFragment;
-import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-import com.google.firebase.firestore.WriteBatch;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

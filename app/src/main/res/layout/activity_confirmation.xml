@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ConfirmationActivity">
+
+    <com.varunest.sparkbutton.SparkButton
+        android:id="@+id/spark_button"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        app:sparkbutton_activeImage="@drawable/ic_favorite_fill"
+        app:sparkbutton_inActiveImage="@drawable/ic_favorite_border_24"
+        app:sparkbutton_iconSize="40dp"
+        app:sparkbutton_primaryColor="@color/orange"
+        app:sparkbutton_secondaryColor="@color/red" />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/spark_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:text="Thank Your !"/>
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#4CAF50"
+            android:padding="15dp"
+            android:textColor="#fff"
+            android:id="@+id/button_id"
+            android:text="Go To Home"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
