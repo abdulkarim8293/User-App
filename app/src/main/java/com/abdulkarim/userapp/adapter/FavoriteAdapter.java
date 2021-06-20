@@ -38,6 +38,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         holder.favorite_product_name.setText("Name "+favorite.getProduct_name());
         holder.favorite_product_price.setText("Price "+favorite.getProduct_price());
 
+        double old_price = (Double.valueOf(favorite.getProduct_price())+Double.valueOf(favorite.getProduct_price())*0.25);
+        int price = (int) old_price;
+        holder.old_price.setText("৳ "+price);
+
         Picasso.get().load(favorite.getProduct_image())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
@@ -53,7 +57,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView favorite_product_image;
-        private TextView favorite_product_name,favorite_product_price;
+        private TextView favorite_product_name,favorite_product_price,old_price;
 
         public FavoriteViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +65,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             favorite_product_image = itemView.findViewById(R.id.item_favorite_product_image_view);
             favorite_product_name = itemView.findViewById(R.id.item_favorite_product_name_text_view);
             favorite_product_price = itemView.findViewById(R.id.item_favorite_product_price_text_view);
+            old_price = itemView.findViewById(R.id.item_favorite_product_old_price);
+
+
         }
     }
 }

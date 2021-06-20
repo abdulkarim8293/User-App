@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abdulkarim.userapp.Cart;
+import com.abdulkarim.userapp.CustomProgress;
 import com.abdulkarim.userapp.Order;
 import com.abdulkarim.userapp.OrderItem;
 import com.abdulkarim.userapp.Product;
@@ -56,7 +57,6 @@ public class ProfileFragment extends Fragment {
 
     private List<OrderItem> cartList = new ArrayList<>();
 
-
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -73,6 +73,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         getUserInfo();
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -111,11 +112,9 @@ public class ProfileFragment extends Fragment {
 
     private void getMyOrders(String user_id) {
 
-
         firebaseFirestore.collection("orders").whereEqualTo("user_id",user_id).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
 
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                     Order order = documentSnapshot.toObject(Order.class);

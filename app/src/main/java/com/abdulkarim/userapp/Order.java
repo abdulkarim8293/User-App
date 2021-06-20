@@ -1,5 +1,6 @@
 package com.abdulkarim.userapp;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,26 +11,29 @@ public class Order {
     private String order_status;
     private String price;
     private String delivery_charge;
-    //private List<Product> order_details;
-    //private Address delivery_address;
+    private String place_date;
 
 
     public Order() {
 
     }
 
-    public Order(String product_id, String user_id, String order_status, String price, String delivery_charge) {
+    public Order(String product_id, String user_id, String order_status, String price, String delivery_charge, String place_date) {
         this.product_id = product_id;
         this.user_id = user_id;
         this.order_status = order_status;
         this.price = price;
         this.delivery_charge = delivery_charge;
-
-
+        this.place_date = place_date;
     }
 
+    public String getPlace_date() {
+        return place_date;
+    }
 
-
+    public void setPlace_date(String place_date) {
+        this.place_date = place_date;
+    }
 
     public String getProduct_id() {
         return product_id;

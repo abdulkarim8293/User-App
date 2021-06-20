@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:padding="10dp"
-    android:background="#00000000"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="5dp"
     android:layout_height="wrap_content">
 
-    <!--<ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"/>-->
-
-    <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/spin_kit"
-        style="@style/SpinKitView.Large.Circle"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        app:SpinKit_Color="@color/orange" />
-
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+    <LinearLayout
+        android:layout_margin="2dp"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spin_kit"
-        android:text="Please wait..."/>
+        android:orientation="vertical">
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Large.Circle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            app:SpinKit_Color="@color/orange" />
 
-</RelativeLayout>
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Please wait..."/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:background="#F9F9F9"
         android:padding="5dp"
         android:id="@+id/item_address_ll_address"
         android:layout_width="match_parent"
@@ -18,32 +19,37 @@
 
         <TextView
             android:id="@+id/item_address_name_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:text="Name"
+            android:padding="1dp"
             android:textColor="#000000" />
 
         <TextView
+            android:padding="1dp"
             android:id="@+id/item_address_phone_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Phone Number" />
 
         <TextView
+            android:padding="1dp"
             android:id="@+id/item_address_city_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Address City" />
 
         <TextView
+            android:padding="1dp"
             android:id="@+id/item_address_address_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Address" />
         <TextView
+            android:padding="1dp"
             android:id="@+id/item_address_type_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Type" />
 

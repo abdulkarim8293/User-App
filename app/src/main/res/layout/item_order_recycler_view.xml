@@ -19,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_weight="1"
             android:text="Order Id"
             android:textColor="#000000"
             android:textSize="14sp" />
@@ -30,13 +29,34 @@
             android:layout_height="wrap_content"
             android:text="Total Price" />
 
+
         <TextView
-            android:id="@+id/item_order_status_text_view"
+            android:id="@+id/item_order_place_date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="#4CAF50"
-            android:text="Order Status" />
+            android:text="Placed on " />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="1dp"
+                android:text="Status  " />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:id="@+id/item_order_status_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="#4CAF50"
+                android:text="Pending" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/item_order_details_recycler_view"

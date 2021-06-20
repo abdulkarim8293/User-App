@@ -2,8 +2,13 @@ package com.abdulkarim.userapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.abdulkarim.userapp.fragments.CartFragment;
@@ -12,10 +17,16 @@ import com.abdulkarim.userapp.fragments.HomeFragment;
 import com.abdulkarim.userapp.fragments.ProfileFragment;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private ChipNavigationBar chipNavigationBar;
     private boolean isFirstPressed = false;
+
+    private List<Cart> cartList = new ArrayList<>();
+    private int total_cart_item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,19 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
         bottomMenu();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cartList.clear();
+        cartList.addAll(new SQLiteDatabaseHelper(this).getAllCartProduct());
+        total_cart_item = cartList.size();
+        if (total_cart_item>0){
+            chipNavigationBar.showBadge(R.id.bottom_nav_cart,total_cart_item);
+        }else {
+            chipNavigationBar.dismissBadge(R.id.bottom_nav_cart);
+        }
     }
 
     @Override
@@ -69,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.bottom_nav_cart:
                         fragment = new CartFragment();
+                        chipNavigationBar.dismissBadge(R.id.bottom_nav_cart);
                         break;
                     case R.id.bottom_nav_favourite:
                         fragment = new FavouriteFragment();
@@ -82,5 +107,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
 }

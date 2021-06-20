@@ -2,10 +2,12 @@ package com.abdulkarim.userapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
+import com.varunest.sparkbutton.SparkButton;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +67,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.product_name_text.setText(""+product.getName());
         holder.product_price_text.setText("৳ "+product.getPrice());
 
+        double old_price = (Double.valueOf(product.getPrice())+Double.valueOf(product.getPrice())*0.25);
+        int price = (int) old_price;
+        holder.old_price.setText("৳ "+price);
+
 
         Picasso.get().load(product.getImage_url())
                 .placeholder(R.drawable.ic_launcher_background)
@@ -86,13 +93,50 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         String productId = product.getId();
         holder.getFavouriteStatus(productId,userId);
 
-        holder.favorite.setOnClickListener(new View.OnClickListener() {
+        holder.sparkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isFavorite = true;
                 FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
                 DocumentReference docRef = firebaseFirestore.collection("favorites").document(userId).collection("favorite_list").document(productId);
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (isFavorite){
+                            if (documentSnapshot.exists()){
+                                String users = documentSnapshot.getString("user_id");
+                                if (users.equals(userId)){
+                                    docRef.delete();
+                                    holder.sparkButton.setChecked(false);
+                                    holder.sparkButton.setActiveImage(R.drawable.ic_favorite_border_24);
+                                    isFavorite = false;
+                                }
+                            }else {
+                                Map<String,Object> favoriteMap = new HashMap<>();
+                                favoriteMap.put("user_id",userId);
+                                favoriteMap.put("product_id",productId);
+                                favoriteMap.put("product_name",product.getName());
+                                favoriteMap.put("product_price",product.getPrice());
+                                favoriteMap.put("product_image",product.getImage_url());
+                                docRef.set(favoriteMap);
+                                holder.sparkButton.setChecked(true);
+                                holder.sparkButton.setActiveImage(R.drawable.ic_favorite_fill);
+                                holder.sparkButton.playAnimation();
+                                isFavorite = false;
+                            }
+                        }
+                    }
+                });
 
+            }
+        });
+
+/*        holder.favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isFavorite = true;
+                FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+                DocumentReference docRef = firebaseFirestore.collection("favorites").document(userId).collection("favorite_list").document(productId);
                 docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -104,27 +148,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                                    holder.favorite.setImageResource(R.drawable.ic_favorite_off);
                                    isFavorite = false;
                                }
-
                            }else {
                                Map<String,Object> favoriteMap = new HashMap<>();
-
                                favoriteMap.put("user_id",userId);
                                favoriteMap.put("product_id",productId);
                                favoriteMap.put("product_name",product.getName());
                                favoriteMap.put("product_price",product.getPrice());
                                favoriteMap.put("product_image",product.getImage_url());
-
                                docRef.set(favoriteMap);
-
-                               holder.favorite.setImageResource(R.drawable.ic_favorite_on);
+                               holder.favorite.setImageResource(R.drawable.ic_favorite_fill);
                                isFavorite = false;
                            }
-
                        }
                     }
                 });
             }
-        });
+        });*/
 
 
 
@@ -139,8 +178,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView product_name_text,product_price_text;
-        private ImageView product_image,favorite;
+        private ImageView product_image;
         private LinearLayout linearLayout;
+        private TextView old_price;
+
+        private SparkButton sparkButton;
 
 
 
@@ -150,8 +192,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             product_name_text = itemView.findViewById(R.id.item_product_name_text_view);
             product_price_text = itemView.findViewById(R.id.item_product_price_text_view);
             product_image = itemView.findViewById(R.id.item_image_view);
-            favorite = itemView.findViewById(R.id.item_favorite);
+            old_price = itemView.findViewById(R.id.item_product_old_price);
             linearLayout = itemView.findViewById(R.id.item_ll);
+
+            sparkButton = itemView.findViewById(R.id.spark_button);
+
+            old_price.setPaintFlags(old_price.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
         }
 
@@ -166,9 +212,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                         String users = documentSnapshot.getString("user_id");
                         if (users.equals(userId)){
                             Log.i("TAG","product is exist : "+productId);
-                            favorite.setImageResource(R.drawable.ic_favorite_on);
+                            //favorite.setImageResource(R.drawable.ic_favorite_fill);
+                            sparkButton.setActiveImage(R.drawable.ic_favorite_fill);
+                            sparkButton.setChecked(true);
                         }else {
-                            favorite.setImageResource(R.drawable.ic_favorite_off);
+                            //favorite.setImageResource(R.drawable.ic_favorite_off);
+                            sparkButton.setChecked(false);
+                            sparkButton.setActiveImage(R.drawable.ic_favorite_border_24);
                             Log.i("TAG","product is not exist in favorite collections : "+productId);
                         }
 

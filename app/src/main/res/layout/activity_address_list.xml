@@ -3,15 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".my_address.AddressListActivity">
 
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/backIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@drawable/ic_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_centerVertical="true"
+            android:text="ADDRESS LIST"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_more_vert_24" />
+
+    </RelativeLayout>
+
     <Button
-        android:layout_width="wrap_content"
+        android:layout_below="@+id/top_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Address"
         android:textAllCaps="false"
-        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_selector"
         android:layout_centerHorizontal="true"
         android:id="@+id/add_address_button"/>
 
@@ -20,7 +55,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
-        android:layout_marginTop="10dp"
         android:id="@+id/address_recycler_view"/>
 
 </RelativeLayout>

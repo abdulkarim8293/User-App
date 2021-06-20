@@ -17,4 +17,6 @@
     <color name="red">#FF0000</color>
     <color name="orange">#FF9800</color>
 
+    <color name="colorAccent">#ED2173</color>
+
 </resources>

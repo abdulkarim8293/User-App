@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,13 +69,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         Order order = orderList.get(position);
 
-
         //List<Cart> carts = getProductList(order.getProduct_id());
         List<OrderItem> carts = getProductLists(order.getProduct_id());
 
-        holder.order_id.setText("Order Id :"+order.getProduct_id());
-        holder.order_price.setText(order.getPrice());
-        holder.order_status.setText("Order Status : "+order.getOrder_status());
+        if (order.getOrder_status().equals("processing")){
+            holder.order_status.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+        }else if (order.getOrder_status().equals("delivered")){
+            holder.order_status.setTextColor(ContextCompat.getColor(context, R.color.black)); 
+        }
+
+        holder.order_id.setText("Order  "+order.getProduct_id());
+        holder.order_price.setText("Price  "+order.getPrice()+" ৳");
+        holder.order_status.setText(""+order.getOrder_status());
+        holder.placed_on.setText("Placed on  "+order.getPlace_date());
+
 
 
         checkoutAdapter = new ChildProductAdapter(getProductLists(order.getProduct_id()));
@@ -133,7 +141,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     public class OrderViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView order_id,order_price,order_status;
+        private TextView order_id,order_price,order_status,placed_on;
         private RecyclerView order_details;
 
         public OrderViewHolder(@NonNull View itemView) {
@@ -142,6 +150,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             order_price = itemView.findViewById(R.id.item_order_price_text_view);
             order_status = itemView.findViewById(R.id.item_order_status_text_view);
             order_details = itemView.findViewById(R.id.item_order_details_recycler_view);
+            placed_on = itemView.findViewById(R.id.item_order_place_date_text_view);
         }
     }
 }

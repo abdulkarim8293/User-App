@@ -5,9 +5,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,12 +38,24 @@ public class ProductActivity extends AppCompatActivity {
     private Button add_card;
     private SQLiteDatabaseHelper sqLiteDatabaseHelper;
 
+    private TextView product_increase,product_decrease,product_quantity,total_price;
+    private int quantity = 1;
+
+    private int totalCartItem = 0;
+    private TextView cartBadgeTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
         sqLiteDatabaseHelper = new SQLiteDatabaseHelper(this);
+        totalCartItem = sqLiteDatabaseHelper.getAllCartProduct().size();
+
+        cartBadgeTextView = findViewById(R.id.cart_badge_text_view);
+        cartBadgeTextView.setText(String.valueOf(totalCartItem));
+        cartBadgeTextView.setVisibility(totalCartItem == 0 ? cartBadgeTextView.GONE : cartBadgeTextView.VISIBLE);
+
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -56,6 +72,8 @@ public class ProductActivity extends AppCompatActivity {
 
                 product_name.setText(""+product.getName());
                 product_price.setText(""+product.getPrice());
+
+                total_price.setText("Total "+product.getPrice());
             }
         });
 
@@ -73,7 +91,7 @@ public class ProductActivity extends AppCompatActivity {
                 cart.setName(product.getName());
                 cart.setImage(product.getImage_url());
                 cart.setPrice(product.getPrice());
-                cart.setQuantity(1);
+                cart.setQuantity(quantity);
 
                 if (sqLiteDatabaseHelper.isInCart(cart.getId())){
                     Snackbar snackbar = Snackbar.make(view,"Already added in your cart",Snackbar.LENGTH_SHORT).setAnchorView(view);
@@ -83,6 +101,13 @@ public class ProductActivity extends AppCompatActivity {
                     sqLiteDatabaseHelper.addToCart(cart);
                     Snackbar snackbar = Snackbar.make(view,"Added to cart successfully!",Snackbar.LENGTH_SHORT).setAnchorView(view);
                     snackbar.show();
+
+                    if (totalCartItem<1){
+                        cartBadgeTextView.setText(String.valueOf(1));
+                        cartBadgeTextView.setVisibility(View.VISIBLE);
+                    }
+                    cartBadgeTextView.setText(String.valueOf(totalCartItem+1));
+
                 }
 
             }
@@ -97,12 +122,44 @@ public class ProductActivity extends AppCompatActivity {
                 intent.putExtra("name",product.getName());
                 intent.putExtra("image",product.getImage_url());
                 intent.putExtra("price",product.getPrice());
-                intent.putExtra("quantity",2);
+                intent.putExtra("quantity",quantity);
                 startActivity(intent);
 
             }
         });
 
+        product_increase = findViewById(R.id.product_increase);
+        product_decrease = findViewById(R.id.product_decrease);
+        product_quantity = findViewById(R.id.product_quantity);
+        total_price = findViewById(R.id.product_total_price);
+
+
+        product_quantity.setText(""+quantity);
+
+        product_increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quantity++;
+                product_quantity.setText(""+quantity);
+
+                total_price.setText("Total "+Integer.parseInt(product.getPrice()) * quantity);
+            }
+        });
+        product_decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (quantity > 1){
+                    quantity--;
+                    product_quantity.setText(""+quantity);
+                    total_price.setText("Total "+Integer.parseInt(product.getPrice()) * quantity);
+                }
+
+            }
+        });
+
+
+
 
     }
+
 }

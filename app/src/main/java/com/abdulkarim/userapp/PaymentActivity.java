@@ -3,9 +3,13 @@ package com.abdulkarim.userapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.abdulkarim.userapp.my_address.MyAddress;
@@ -37,6 +41,7 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -134,6 +139,8 @@ public class PaymentActivity extends AppCompatActivity {
         orderMap.put("price", order.getPrice());
         orderMap.put("delivery_charge", order.getDelivery_charge());
         orderMap.put("order_status", order.getOrder_status());
+        orderMap.put("place_date", String.valueOf(Timestamp.now().toDate()));
+
 
 
         batch.set(documentReference, orderMap);
@@ -184,12 +191,18 @@ public class PaymentActivity extends AppCompatActivity {
         batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+                for (Cart cart : cartList){
+                    new SQLiteDatabaseHelper(PaymentActivity.this).removeProductFromCart(cart.getId());
+                }
 
                 customProgress.cancel();
-                startActivity(new Intent(PaymentActivity.this,ConfirmationActivity.class));
+                startActivity(new Intent(PaymentActivity.this,ConfirmationActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+
                 finish();
             }
         });
 
     }
+
 }

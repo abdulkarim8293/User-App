@@ -9,8 +9,8 @@
 
     <com.varunest.sparkbutton.SparkButton
         android:id="@+id/spark_button"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_centerInParent="true"
         app:sparkbutton_activeImage="@drawable/ic_favorite_fill"
         app:sparkbutton_inActiveImage="@drawable/ic_favorite_border_24"
@@ -19,22 +19,23 @@
         app:sparkbutton_secondaryColor="@color/red" />
 
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/spark_button"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:padding="10dp"
             android:layout_height="wrap_content"
-            android:text="Thank Your !"/>
+            android:text="Thank You ! Your Order has been Placed "/>
         <Button
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#4CAF50"
+            android:background="@drawable/button_background"
             android:padding="15dp"
             android:textColor="#fff"
             android:id="@+id/button_id"

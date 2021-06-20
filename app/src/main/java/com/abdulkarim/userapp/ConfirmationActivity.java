@@ -19,8 +19,8 @@ public class ConfirmationActivity extends AppCompatActivity {
 
         sparkButton = findViewById(R.id.spark_button);
         sparkButton.setChecked(true);
+        sparkButton.setAnimationSpeed(0.9f);
         sparkButton.playAnimation();
-
 
         sparkButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +36,9 @@ public class ConfirmationActivity extends AppCompatActivity {
         findViewById(R.id.button_id).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ConfirmationActivity.this,MainActivity.class));
+                Intent intent = new Intent(ConfirmationActivity.this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
             }
         });
