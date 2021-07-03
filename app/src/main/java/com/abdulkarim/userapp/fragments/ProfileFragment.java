@@ -143,7 +143,7 @@ public class ProfileFragment extends Fragment {
 
         for (Order order : orderList){
 
-            firebaseFirestore.collection("orders").document(order.getProduct_id()).collection("order_details").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            firebaseFirestore.collection("orders").document(order.getId()).collection("order_details").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                     List<OrderItem> carts = new ArrayList<>();

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Order {
 
-    private String product_id;
+    private String id;
     private String user_id;
     private String order_status;
     private String price;
@@ -18,8 +18,8 @@ public class Order {
 
     }
 
-    public Order(String product_id, String user_id, String order_status, String price, String delivery_charge, String place_date) {
-        this.product_id = product_id;
+    public Order(String id, String user_id, String order_status, String price, String delivery_charge, String place_date) {
+        this.id = id;
         this.user_id = user_id;
         this.order_status = order_status;
         this.price = price;
@@ -35,12 +35,12 @@ public class Order {
         this.place_date = place_date;
     }
 
-    public String getProduct_id() {
-        return product_id;
+    public String getId() {
+        return id;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUser_id() {
@@ -78,11 +78,12 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "product_id='" + product_id + '\'' +
+                "id='" + id + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", order_status='" + order_status + '\'' +
                 ", price='" + price + '\'' +
                 ", delivery_charge='" + delivery_charge + '\'' +
+                ", place_date='" + place_date + '\'' +
                 '}';
     }
 }

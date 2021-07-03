@@ -70,7 +70,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         Order order = orderList.get(position);
 
         //List<Cart> carts = getProductList(order.getProduct_id());
-        List<OrderItem> carts = getProductLists(order.getProduct_id());
+        List<OrderItem> carts = getProductLists(order.getId());
 
         if (order.getOrder_status().equals("processing")){
             holder.order_status.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
@@ -78,14 +78,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             holder.order_status.setTextColor(ContextCompat.getColor(context, R.color.black)); 
         }
 
-        holder.order_id.setText("Order  "+order.getProduct_id());
+        holder.order_id.setText("Order  "+order.getId());
         holder.order_price.setText("Price  "+order.getPrice()+" ৳");
         holder.order_status.setText(""+order.getOrder_status());
         holder.placed_on.setText("Placed on  "+order.getPlace_date());
 
 
 
-        checkoutAdapter = new ChildProductAdapter(getProductLists(order.getProduct_id()));
+        checkoutAdapter = new ChildProductAdapter(getProductLists(order.getId()));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         holder.order_details.setLayoutManager(linearLayoutManager);
         holder.order_details.setAdapter(checkoutAdapter);

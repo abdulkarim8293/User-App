@@ -19,12 +19,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.WriteBatch;
+import com.google.type.DateTime;
 
+import java.text.Format;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class PaymentActivity extends AppCompatActivity {
 
@@ -134,13 +139,12 @@ public class PaymentActivity extends AppCompatActivity {
 
         Map<String, Object> orderMap = new HashMap<>();
         //orderMap.put("product_id", documentReference.getId());
-        orderMap.put("product_id", documentReference.getId());
+        orderMap.put("id", documentReference.getId());
         orderMap.put("user_id", order.getUser_id());
         orderMap.put("price", order.getPrice());
         orderMap.put("delivery_charge", order.getDelivery_charge());
         orderMap.put("order_status", order.getOrder_status());
         orderMap.put("place_date", String.valueOf(Timestamp.now().toDate()));
-
 
 
         batch.set(documentReference, orderMap);
